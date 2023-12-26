@@ -15,3 +15,6 @@ print(dataset.head(5))
 # print 5 random rows and describe the data
 print(dataset.sample(5))
 print(dataset.describe())
+
+# give an overview of the data
+print(dataset.info())
