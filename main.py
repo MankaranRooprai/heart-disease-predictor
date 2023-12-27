@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 import warnings
-
+from sklearn.model_selection import train_test_split
 
 dataset = pd.read_csv("heart.csv")
 
@@ -107,6 +107,20 @@ print("\n")
 
 # analyzing thal (Thalassemia)
 dataset["thal"].unique()
-sns.barplot(dataset["thal"],y)
-sns.distplot(dataset["thal"])
+sns.barplot(x=dataset["thal"],y=y)
+sns.displot(dataset["thal"])
 print("\n")
+
+# creates a new DataFrame called predictors by dropping the "target" column from the original dataset DataFrame,
+# along the specified axis (axis=1 indicates columns)
+predictors = dataset.drop("target",axis=1)
+target = dataset["target"]
+
+# split the dataset into training and testing sets to run a train-test split
+# 80% of data used for training and 20% used for testing
+X_train,X_test,Y_train,Y_test = train_test_split(predictors,target,test_size=0.20,random_state=0)
+print(X_train.shape)
+print(X_test.shape)
+print(Y_train.shape)
+print(Y_test.shape)
+
