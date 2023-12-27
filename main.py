@@ -82,3 +82,31 @@ dataset["fbs"].describe()
 dataset["fbs"].unique()
 sns.barplot(x=dataset["fbs"],y=y)
 print("\n")
+
+# analyze the resting electrocardiographic measurement (values 0-2)
+dataset["restecg"].unique()
+sns.barplot(x=dataset["restecg"],y=y)
+print("\n")
+
+# analyze exang (exercise induced angina) (values 0 and 1)
+dataset["exang"].unique()
+sns.barplot(x=dataset["exang"],y=y)
+print("\n")
+
+#  analyze heart pain according to the slope of an incline (values from 0 to 2)
+dataset["slope"].unique()
+sns.barplot(x=dataset["slope"],y=y)
+print("\n")
+
+# number of major vessels (0-3)
+# ca=4 has the largest number of heart patients
+dataset["ca"].unique()
+sns.countplot(x=dataset["ca"])
+sns.barplot(x=dataset["ca"],y=y)
+print("\n")
+
+# analyzing thal (Thalassemia)
+dataset["thal"].unique()
+sns.barplot(dataset["thal"],y)
+sns.distplot(dataset["thal"])
+print("\n")
