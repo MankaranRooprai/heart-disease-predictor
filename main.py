@@ -5,6 +5,7 @@ import seaborn as sns
 import os
 import warnings
 
+
 dataset = pd.read_csv("heart.csv")
 
 # print out the dataset type (should be dataframe), the dataset shape (number of rows and columns), and the first 5 rows
@@ -64,3 +65,20 @@ print("\n")
 
 print("Percentage of patients without heart problems: "+str(round(target_temp[0]*100/303,2)))
 print("Percentage of patients with heart problems: "+str(round(target_temp[1]*100/303,2)))
+print("\n")
+
+# females more likely to have heart problems than males
+print(dataset["sex"].unique())
+sns.barplot(x=dataset["sex"],y=y)
+print("\n")
+
+# chest pain type (values range from 0 - 3)
+dataset["cp"].unique()
+sns.barplot(x=dataset["cp"],y=y)
+print("\n")
+
+# fasting blood sugar (values: 0 and 1)
+dataset["fbs"].describe()
+dataset["fbs"].unique()
+sns.barplot(dataset["fbs"],y)
+print("\n")
