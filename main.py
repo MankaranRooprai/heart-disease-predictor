@@ -5,6 +5,9 @@ import seaborn as sns
 import os
 import warnings
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 
 dataset = pd.read_csv("heart.csv")
 
@@ -124,3 +127,25 @@ print(X_test.shape)
 print(Y_train.shape)
 print(Y_test.shape)
 
+# Model Fitting for Logistic regression (used for classification problems as opposed to linear regression)
+lr = LogisticRegression(max_iter=1000)
+lr.fit(X_train,Y_train)
+Y_pred_lr = lr.predict(X_test)
+Y_pred_lr.shape
+print("\n")
+
+# compute the accuracy score of Logistic regression testing
+score_lr = round(accuracy_score(Y_pred_lr,Y_test)*100,2)
+
+print("The accuracy score achieved using Logistic Regression is: "+str(score_lr)+" %")
+print("\n")
+
+# calculate naive bayes accuracy score
+nb = GaussianNB()
+nb.fit(X_train, Y_train)
+Y_pred_nb = nb.predict(X_test)
+# dimensions of the array (rows, columns)
+print(Y_pred_nb.shape)
+
+score_nb = round(accuracy_score(Y_pred_nb,Y_test)*100,2)
+print("The accuracy score achieved using Naive Bayes is: "+str(score_nb)+" %")
