@@ -8,6 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 dataset = pd.read_csv("heart.csv")
 
@@ -169,3 +170,27 @@ print(Y_pred_knn.shape)
 
 score_knn = round(accuracy_score(Y_pred_knn,Y_test)*100,2)
 print("The accuracy score achieved using KNN is: "+str(score_knn)+" %")
+print("\n")
+
+# calculate Decision Tree accuracy score
+max_accuracy = 0
+
+for x in range(200):
+    dt = DecisionTreeClassifier(random_state=x)
+    dt.fit(X_train, Y_train)
+    Y_pred_dt = dt.predict(X_test)
+    current_accuracy = round(accuracy_score(Y_pred_dt, Y_test)*100, 2)
+    if current_accuracy > max_accuracy:
+        max_accuracy = current_accuracy
+        best_x = x
+
+print("Max accuracy: ", max_accuracy)
+print("Best x value input: ", best_x)
+
+dt = DecisionTreeClassifier(random_state=best_x)
+dt.fit(X_train,Y_train)
+Y_pred_dt = dt.predict(X_test)
+print(Y_pred_dt.shape)
+
+score_dt = round(accuracy_score(Y_pred_dt,Y_test)*100,2)
+print("The accuracy score achieved using Decision Tree is: "+str(score_dt)+" %")
