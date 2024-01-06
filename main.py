@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn import svm
+from sklearn.neighbors import KNeighborsClassifier
 
 dataset = pd.read_csv("heart.csv")
 
@@ -158,3 +159,13 @@ print(Y_pred_svm.shape)
 
 score_svm = round(accuracy_score(Y_pred_svm,Y_test)*100,2)
 print("The accuracy score achieved using Linear SVM is: "+str(score_svm)+" %")
+print("\n")
+
+# calculate K Nearest Neighbors accuracy score
+knn = KNeighborsClassifier(n_neighbors=7)
+knn.fit(X_train,Y_train)
+Y_pred_knn=knn.predict(X_test)
+print(Y_pred_knn.shape)
+
+score_knn = round(accuracy_score(Y_pred_knn,Y_test)*100,2)
+print("The accuracy score achieved using KNN is: "+str(score_knn)+" %")
