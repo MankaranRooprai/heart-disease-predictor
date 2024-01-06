@@ -2,12 +2,11 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
-import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
+from sklearn import svm
 
 dataset = pd.read_csv("heart.csv")
 
@@ -149,3 +148,13 @@ print(Y_pred_nb.shape)
 
 score_nb = round(accuracy_score(Y_pred_nb,Y_test)*100,2)
 print("The accuracy score achieved using Naive Bayes is: "+str(score_nb)+" %")
+print("\n")
+
+# calculate Support Vector Machine (SVM) accuracy score
+sv = svm.SVC(kernel='linear')
+sv.fit(X_train, Y_train)
+Y_pred_svm = sv.predict(X_test)
+print(Y_pred_svm.shape)
+
+score_svm = round(accuracy_score(Y_pred_svm,Y_test)*100,2)
+print("The accuracy score achieved using Linear SVM is: "+str(score_svm)+" %")
