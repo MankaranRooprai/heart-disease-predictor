@@ -56,6 +56,9 @@ The script generates accuracy scores for different machine learning models, incl
 - Neural Network
 
 The final accuracy scores are visualized using a barplot.
+The highest accuracy is using Random Forest at 88.52%.
+
+![img.png](img.png)
 
 # Important Notes
 
@@ -66,7 +69,7 @@ The final accuracy scores are visualized using a barplot.
 
 # Acknowledgments
 
-- The dataset used in this project is sourced from [provide the source if applicable].
+- The dataset, code, and graph(s) used in this project is sourced from https://github.com/g-shreekant/Heart-Disease-Prediction-using-Machine-Learning/tree/master.
 - Special thanks to the developers of scikit-learn, XGBoost, and TensorFlow for their contributions to machine learning libraries.
 
 Feel free to explore and modify the script for further analysis or improvement of predictive models.
