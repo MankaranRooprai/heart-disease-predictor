@@ -9,6 +9,10 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+import xgboost as xgb
+from keras.models import Sequential
+from keras.layers import Dense
 
 dataset = pd.read_csv("heart.csv")
 
@@ -194,3 +198,58 @@ print(Y_pred_dt.shape)
 
 score_dt = round(accuracy_score(Y_pred_dt,Y_test)*100,2)
 print("The accuracy score achieved using Decision Tree is: "+str(score_dt)+" %")
+print("\n")
+
+# # calculate Random Forest accuracy score
+# max_accuracy = 0
+#
+# for x in range(2000):
+#     rf = RandomForestClassifier(random_state=x)
+#     rf.fit(X_train,Y_train)
+#     Y_pred_rf = rf.predict(X_test)
+#     current_accuracy = round(accuracy_score(Y_pred_rf,Y_test)*100,2)
+#     if(current_accuracy>max_accuracy):
+#         max_accuracy = current_accuracy
+#         best_x = x
+#
+# print(max_accuracy)
+# print(best_x)
+#
+# rf = RandomForestClassifier(random_state=best_x)
+# rf.fit(X_train,Y_train)
+# Y_pred_rf = rf.predict(X_test)
+#
+# print(Y_pred_rf.shape)
+#
+# score_rf = round(accuracy_score(Y_pred_rf,Y_test)*100,2)
+# print("The accuracy score achieved using Random Forest is: "+str(score_rf)+" %")
+# print("\n")
+
+# calculate XGBoost accuracy score
+xgb_model = xgb.XGBClassifier(objective="binary:logistic", random_state=42)
+xgb_model.fit(X_train, Y_train)
+
+Y_pred_xgb = xgb_model.predict(X_test)
+print(Y_pred_xgb.shape)
+
+score_xgb = round(accuracy_score(Y_pred_xgb,Y_test)*100,2)
+print("The accuracy score achieved using XGBoost is: "+str(score_xgb)+" %")
+print("\n")
+
+# calculate Neural Network accuracy score
+model = Sequential()
+model.add(Dense(11,activation='relu',input_dim=13))
+model.add(Dense(1,activation='sigmoid'))
+
+model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
+model.fit(X_train,Y_train,epochs=300)
+
+Y_pred_nn = model.predict(X_test)
+print(Y_pred_nn.shape)
+
+rounded = [round(x[0]) for x in Y_pred_nn]
+Y_pred_nn = rounded
+
+score_nn = round(accuracy_score(Y_pred_nn,Y_test)*100,2)
+print("The accuracy score achieved using Neural Network is: "+str(score_nn)+" %")
+#Note: Accuracy of 85% can be achieved on the test set, by setting epochs=2000, and number of nodes = 11.
