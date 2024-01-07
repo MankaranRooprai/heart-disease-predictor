@@ -255,4 +255,9 @@ print("The accuracy score achieved using Neural Network is: "+str(score_nn)+" %"
 #Note: Accuracy of 85% can be achieved on the test set, by setting epochs=2000, and number of nodes = 11.
 
 
+# output final score
+scores = [score_lr,score_nb,score_svm,score_knn,score_dt,score_rf,score_xgb,score_nn]
+algorithms = ["Logistic Regression","Naive Bayes","Support Vector Machine","K-Nearest Neighbors","Decision Tree","Random Forest","XGBoost","Neural Network"]
 
+for i in range(len(algorithms)):
+    print("The accuracy score achieved using "+algorithms[i]+" is: "+str(scores[i])+" %")
