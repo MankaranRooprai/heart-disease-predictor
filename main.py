@@ -203,7 +203,7 @@ print("\n")
 # calculate Random Forest accuracy score
 max_accuracy = 0
 
-for x in range(2000):
+for x in range(100):
     rf = RandomForestClassifier(random_state=x)
     rf.fit(X_train,Y_train)
     Y_pred_rf = rf.predict(X_test)
@@ -261,3 +261,11 @@ algorithms = ["Logistic Regression","Naive Bayes","Support Vector Machine","K-Ne
 
 for i in range(len(algorithms)):
     print("The accuracy score achieved using "+algorithms[i]+" is: "+str(scores[i])+" %")
+
+# barplot of final scores
+sns.set(rc={'figure.figsize':(15,8)})
+plt.xlabel("Algorithms")
+plt.ylabel("Accuracy score")
+
+sns.barplot(x=algorithms,y=scores)
+plt.show()
